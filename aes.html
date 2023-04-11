@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+</head>
+
+<body>
+<p>留空不显示</p>
+    <input class="bt" placeholder="标题">
+    <input class="url" placeholder="视频地址">
+    <input class="btn_text" placeholder="按钮标题">
+    <input class="tc_content" placeholder="弹窗内容">
+    <input class="tc_link" placeholder="弹窗链接">
+    <button onclick="btunr()">biu~</button>
+    <div class="text"></div>
+    <script>
+        function btunr() {
+            var bt = $('.bt').val();
+            var url = $('.url').val();
+            var btn_text = $('.btn_text').val();
+            var tc_content = $('.tc_content').val();
+            var tc_link = $('.tc_link').val();
+            var JsonTest = {
+                bt: bt,
+                url: url,
+                btn_text: btn_text,
+                tc_content: tc_content,
+                tc_link: tc_link
+            }
+            var data = encrypt(JSON.stringify(JsonTest));
+            // 播放器地址
+            var dz='https://mapass23.github.io/aduPlay.github.io/1111.html';
+            console.log(data);
+            $('.text').text(dz+'?baidu='+data);
+        }
+
+        const key = '235325fdgerteGHdsfsdewred4347741'; // 32位的密钥
+       
+        function encrypt(text) {
+            return CryptoJS.AES.encrypt(text, CryptoJS.enc.Utf8.parse(key), {
+                mode: CryptoJS.mode.ECB,
+                padding: CryptoJS.pad.Pkcs7
+            }).toString()
+        }
+    </script>
+</body>
+
+</html>
